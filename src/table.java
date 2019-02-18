@@ -214,11 +214,32 @@ public class table {
         frame.addWindowListener(new WindowListener() {
             @Override
             public void windowOpened(WindowEvent e) {
+                File f = new File("state.xml");
+                if (f.isFile() && !f.isDirectory()) {
+                    Circle circle = new Circle();
+                    try {
+                        circle = XmlParser.getXmlData();
+                        textFieldRadius.setText(String.valueOf(circle.getRadius()));
+                        textFieldX.setText(String.valueOf(circle.getX()));
+                        textFieldY.setText(String.valueOf(circle.getY()));
+                    } catch (ParserConfigurationException ex) {
+                        ex.printStackTrace();
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                    } catch (SAXException ex) {
+                        ex.printStackTrace();
 
+                    }
+                } else {
+                    textFieldRadius.setText("Файл не найден!");
+                    textFieldX.setText("Файл не найден!");
+                    textFieldY.setText("Файл не найден!");
+
+                }
             }
 
-            public void windowClosing(WindowEvent event) {
 
+            public void windowClosing(WindowEvent event) {
 
                 String st = textFieldRadius.getText();
                 double radius = 0;
