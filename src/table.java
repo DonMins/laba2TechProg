@@ -1,10 +1,12 @@
 import org.xml.sax.SAXException;
 
 import javax.swing.*;
+import javax.swing.event.AncestorListener;
 import javax.xml.bind.JAXBException;
 import javax.xml.parsers.ParserConfigurationException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
@@ -31,15 +33,12 @@ public class table {
 
                 String st = textFieldRadius.getText();
                 double radius = 0;
-
-
                 try{
                     radius = Double.parseDouble(st);
                 }
                 catch(java.lang.NumberFormatException e1){
                     textFieldRadius.setText("Введите цифры!");
                 }
-
 
                 st = textFieldX.getText();
                 double x = 0;
@@ -74,18 +73,28 @@ public class table {
         getXml.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Circle circle = new Circle();
-                try {
-                    circle = XmlParser.getXmlData();
-                    textFieldRadius.setText(String.valueOf(circle.getRadius()));
-                    textFieldX.setText(String.valueOf(circle.getX()));
-                    textFieldY.setText(String.valueOf(circle.getY()));
-                } catch (ParserConfigurationException ex) {
-                    ex.printStackTrace();
-                } catch (IOException ex) {
-                    ex.printStackTrace();
-                } catch (SAXException ex) {
-                    ex.printStackTrace();
+                File f = new File("state.xml");
+                if(f.isFile() && !f.isDirectory()) {
+                    Circle circle = new Circle();
+                    try {
+                        circle = XmlParser.getXmlData();
+                        textFieldRadius.setText(String.valueOf(circle.getRadius()));
+                        textFieldX.setText(String.valueOf(circle.getX()));
+                        textFieldY.setText(String.valueOf(circle.getY()));
+                    } catch (ParserConfigurationException ex) {
+                        ex.printStackTrace();
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                    } catch (SAXException ex) {
+                        ex.printStackTrace();
+
+                    }
+                }
+                else{
+                    textFieldRadius.setText("Файл не найден!");
+                    textFieldX.setText("Файл не найден!");
+                    textFieldY.setText("Файл не найден!");
+
                 }
             }
         });
@@ -198,13 +207,19 @@ public class table {
                 textFieldY.setText("Введите цифры!");
             }
         });
+
     }
     public static void main(String []args){
         JFrame frame = new JFrame("Окружность");
+
         frame.setContentPane(new table().panelmain);
+        frame.setResizable(false);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
 
+
     }
+
+
 }
