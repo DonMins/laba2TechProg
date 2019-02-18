@@ -90,9 +90,9 @@ public class table {
 
                     }
                 } else {
-                    textFieldRadius.setText("Файл не найден!");
-                    textFieldX.setText("Файл не найден!");
-                    textFieldY.setText("Файл не найден!");
+                    textFieldRadius.setText(String.valueOf(0.0));
+                    textFieldX.setText(String.valueOf(0.0));
+                    textFieldY.setText(String.valueOf(0.0));
 
                 }
             }
@@ -231,9 +231,9 @@ public class table {
 
                     }
                 } else {
-                    textFieldRadius.setText("Файл не найден!");
-                    textFieldX.setText("Файл не найден!");
-                    textFieldY.setText("Файл не найден!");
+                    textFieldRadius.setText(String.valueOf(0.0));
+                    textFieldX.setText(String.valueOf(0.0));
+                    textFieldY.setText(String.valueOf(0.0));
 
                 }
             }
@@ -303,24 +303,12 @@ public class table {
 
             }
         });
-
-
     }
-
     public static void main(String[] args) {
-
-
-
         JFrame frame = new JFrame("Окружность");
-
         frame.setContentPane(new table(frame).panelmain);
         frame.setResizable(false);
-//        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
-
-
     }
-
-
 }
