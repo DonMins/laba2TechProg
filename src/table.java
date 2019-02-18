@@ -202,9 +202,19 @@ public class table {
                 } catch (FileNotFoundException ex) {
                     ex.printStackTrace();
                 }
-                textFieldY.setText("Введите цифры!");
-                textFieldY.setText("Введите цифры!");
-                textFieldY.setText("Введите цифры!");
+                try {
+                    circle = XmlParser.getXmlData();
+                } catch (ParserConfigurationException ex) {
+                    ex.printStackTrace();
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                } catch (SAXException ex) {
+                    ex.printStackTrace();
+                }
+
+                textFieldRadius.setText(String.valueOf(circle.getRadius()));
+                textFieldX.setText(String.valueOf(circle.getX()));
+                textFieldY.setText(String.valueOf(circle.getY()));
             }
         });
 
