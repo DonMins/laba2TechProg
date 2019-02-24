@@ -186,7 +186,6 @@ public class table {
                     textFieldY.setText("Введите цифры!");
                 }
 
-
                 circle = new Circle(radius * newRadius, x + xNew, y + yNew);
                 try {
                     SaveStateCircle.saveInXml(circle);
@@ -237,38 +236,45 @@ public class table {
 
                 }
             }
-
-
             public void windowClosing(WindowEvent event) {
+                Circle circle = new Circle();
+                try {
+                    circle = XmlParser.getXmlData();
+                } catch (ParserConfigurationException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (SAXException e) {
+                    e.printStackTrace();
+                }
 
                 String st = textFieldRadius.getText();
-                double radius = 0;
+                double radius =circle.getRadius() ;
                 try {
                     radius = Double.parseDouble(st);
                 } catch (java.lang.NumberFormatException e1) {
+                    radius =circle.getRadius() ;
                     textFieldRadius.setText("Введите цифры!");
                 }
 
                 st = textFieldX.getText();
-                double x = 0;
+                double x = circle.getX();
                 try {
                     x = Double.parseDouble(st);
                 } catch (java.lang.NumberFormatException e1) {
                     textFieldX.setText("Введите цифры!");
                 }
 
-
                 st = textFieldY.getText();
-                double y = 0;
+                double y = circle.getY();
                 try {
                     y = Double.parseDouble(st);
                 } catch (java.lang.NumberFormatException e1) {
                     textFieldY.setText("Введите цифры!");
                 }
 
-                Circle circle = new Circle();
-                circle = new Circle(radius, x, y);
                 try {
+                    circle = new Circle(radius, x, y);
                     SaveStateCircle.saveInXml(circle);
                 } catch (JAXBException ex) {
                     ex.printStackTrace();
